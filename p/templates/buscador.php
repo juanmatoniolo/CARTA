@@ -1,0 +1,57 @@
+<form action="./probando.php" method="get">
+    <input type="text" class="container-fluid col-sm-4" name="bus">
+    <a href="../PHP/buscar.php"> <input class="container-fluid col-sm-2" type="submit" name="enviar" value="buscar"></a>
+</form>
+
+<?php
+
+if (isset($_GET['enviar'])) {
+    $busqueda = $_GET['bus'];
+
+    $consulta = ("SELECT * FROM bar WHERE nombre LIKE '%$busqueda%' ");
+
+    $datos = mysqli_query($conexion, $consulta);
+    ?>
+    <h3>Resultado de su busqueda:</h3>
+    <?php
+    while ($fila = mysqli_fetch_array($datos)) {
+        ?>
+        <div class="container-fluid principal">
+            <table>
+                <tr class="producto">
+                    <td rowspan="3" class="img col-sm-1">
+                        <img src="data:image/jpg;base64, <?php echo base64_encode($fila['foto']) ?>" alt="" width="150" height>
+                    </td>
+                    <td colspan="3" class="textos">
+                        <h1>
+                            <?php echo $fila['nombre']; ?>
+                        </h1>
+                        <p>
+                            <?php echo $fila['descripcion']; ?>
+                        </p>
+                        <h4>$
+                            <?php echo $fila['precio']; ?>
+                        </h4>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+        <form action="" method="post">
+
+            <input type="hidden" name="id" value="<?php echo openssl_encrypt($fila['id'], COD, KEY); ?>">
+            <input type="hidden" name="nombre" value="<?php echo openssl_encrypt($fila['nombre'], COD, KEY); ?>">
+            <input type="hidden" name="precio" value="<?php echo openssl_encrypt($fila['precio'], COD, KEY); ?>">
+            <input type="hidden" name="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY); ?>">
+            <button class="btn btn-primary" name="btnAccion" value="Agregar" type="submit">
+                Agregar al carrito
+            </button>
+        </form>
+        <br>
+        <hr>
+    <?php }
+
+}
+?>

@@ -1,0 +1,18 @@
+    <div class="container-fluid principal">
+        <table>
+            <tr class="producto">
+                <td rowspan="3" class="img col-sm-1">
+                    <img src="https://assets.iprofesional.com/assets/jpg/2013/01/371667.jpg" height="150px"
+                        width="100px" alt="">
+                </td>
+                <td colspan="3" class="textos">
+                    <h1>Gancia</h1>
+                    <p>Gancia americano con sprite y limon</p>
+                    <h4>$700</h4>
+                </td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+
+    
